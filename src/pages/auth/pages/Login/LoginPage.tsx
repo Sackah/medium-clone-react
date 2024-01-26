@@ -6,9 +6,7 @@ const LoginPageComponent = () => {
   return (
     <div className={"login page"}>
       <LoginNavComonent />
-      <main>
-        <LoginFormComponent />
-      </main>
+      <LoginFormComponent />
     </div>
   );
 };

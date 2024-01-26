@@ -3,6 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ButtonSpinnerA from "../../../../shared/components/loaders/button-spinner-a/ButtonSpinerA";
 import "./LoginForm.scss";
+import {useLogin} from '../../../../hooks/useLogin';
+import {useDispatch} from "react-redux";
+import {setUser} from "../../../../store/userSlice";
+import {useNavigate} from "react-router-dom";
+
 
 const schema = z.object({
   email: z.string().email(),
@@ -20,14 +25,22 @@ const LoginFormComponent = () => {
   } = useForm<FormFields>({
     resolver: zodResolver(schema),
   });
+  const { login } = useLogin();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error("This email is already taken");
-      console.log(data);
+      const response = await login({user: data});
+      dispatch(setUser(response));
+      navigate('/home')
+      console.log(response);
     } catch (e) {
-      if (e instanceof Error) {
+      if (Array.isArray(e)) {
+        setError("root", {
+          message: e.join(', '),
+        });
+      } else if (e instanceof Error) {
         setError("root", {
           message: e.message,
         });

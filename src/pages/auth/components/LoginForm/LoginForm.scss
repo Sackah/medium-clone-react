@@ -32,7 +32,7 @@ section.login-form{
       padding: 12px 24px;
       border-radius: .25rem;
       border: 1px solid rgb(0 0 0 / 15%);
-      width: 90%;
+      width: 100%;
       font-size: $size-5;
 
       &:focus{
@@ -58,6 +58,8 @@ section.login-form{
 
     .error{
       color: red;
+      text-align: center;
+      text-transform: uppercase;
     }
   }
 }
