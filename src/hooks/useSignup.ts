@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { LoginUserDetails, LoginUserResponse } from "../types/auth.types";
+import {SignUpUserDetails, SignUpUserResponse} from "../types/auth.types";
 import {environment} from "../config";
 
-export const useLogin = () => {
+export const  useSignup = () => {
     const [error, setError] = useState<string | string[] | null>(null);
 
-    const login = async (userDetails: LoginUserDetails): Promise<LoginUserResponse | void> => {
+    const signup = async (userDetails: SignUpUserDetails): Promise<SignUpUserResponse | void> => {
         try {
-            const res = await fetch(`${environment.BaseUrl}/users/login`, {
+            const res = await fetch(`${environment.BaseUrl}/users`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export const useLogin = () => {
             if(res.status !== 0){
                 const data = await res.json();
                 if(data.user){
-                    return data as LoginUserResponse;
+                    return data as SignUpUserResponse;
                 } else {
                     const errorMessages: string[] = [];
                     for (let err in data.errors){
@@ -36,5 +36,5 @@ export const useLogin = () => {
         }
     };
 
-    return { login, error };
-};
+    return { signup, error };
+}

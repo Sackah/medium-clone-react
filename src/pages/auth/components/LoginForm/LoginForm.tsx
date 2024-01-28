@@ -2,11 +2,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ButtonSpinnerA from "../../../../shared/components/loaders/button-spinner-a/ButtonSpinerA";
-import "./LoginForm.scss";
 import {useLogin} from '../../../../hooks/useLogin';
 import {useDispatch} from "react-redux";
 import {setUser} from "../../../../store/userSlice";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, NavLink} from "react-router-dom";
+import "../../styles/auth.styles.scss";
 
 
 const schema = z.object({
@@ -52,7 +52,7 @@ const LoginFormComponent = () => {
     <section className={"login-form"}>
       <header>
         <h1>Sign In</h1>
-        <p>Need an account?</p>
+        <NavLink to={'/register'}>Need an account?</NavLink>
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
         {errors.root && <div className={"error"}>{errors.root.message}</div>}
@@ -60,9 +60,9 @@ const LoginFormComponent = () => {
         {errors.email && <div className={"error"}>{errors.email.message}</div>}
         <input {...register("password")} type={"password"} placeholder={"Password"} />
         {errors.password && <div className={"error"}>{errors.password.message}</div>}
-        {!isSubmitting && <button>Sign In</button>}
+        {!isSubmitting && <button type={"submit"}>Sign In</button>}
         {isSubmitting && (
-          <button disabled>
+          <button type={"button"} disabled>
             Signing In <ButtonSpinnerA />
           </button>
         )}

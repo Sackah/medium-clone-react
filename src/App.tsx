@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import LoginPageComponent from "./pages/auth/pages/Login/LoginPage";
 import HomePageComponent from "./pages/home/HomePage";
+import SignupPageComponent from "./pages/auth/pages/SignUp/SignupPage";
 import AuthGuard from "./guards/AuthGuard";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           }
         />
         <Route path={"/login"} element={<LoginPageComponent />} />
+        <Route path={"/register"} element={<SignupPageComponent/>}/>
       </Routes>
     </div>
   );
