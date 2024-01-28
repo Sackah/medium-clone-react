@@ -1,6 +1,21 @@
+import {useDispatch, useSelector} from "react-redux";
+import {clearUser} from "../../store/userSlice";
+import {useNavigate} from "react-router-dom";
+
 const HomePageComponent = () => {
+    const dispatch = useDispatch();
+     const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(clearUser());
+        navigate("/login");
+    }
+
     return(
-        <div>Home page</div>
+        <section>
+            <div>Home page</div>
+            <button onClick={handleLogout}>Logout</button>
+        </section>
     );
 }
 

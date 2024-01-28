@@ -33,7 +33,7 @@ const SignupFormComponent = () =>{
         try {
             const response = await signup({user: data})
             dispatch(setUser(response));
-            navigate("/home");
+            navigate("/");
         } catch (e) {
             if(Array.isArray(e)){
                 setError("root", {

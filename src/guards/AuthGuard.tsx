@@ -1,19 +1,22 @@
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {AuthProps} from '../types/auth.types';
+import {useSelector} from "react-redux";
+import {RootState} from "../store/store";
 
 const AuthGuard = ({children}: AuthProps) => {
+    const user = useSelector((state: RootState)=> state.user);
+    const isLoggedIn = user.isLoggedIn;
     const navigate = useNavigate();
-    const token = localStorage.getItem("token");
 
     useEffect(()=>{
-        const token = localStorage.getItem("token");
-        if(!token){
+        const isLoggedIn = user.isLoggedIn;
+        if(!isLoggedIn){
             navigate('/login')
         }
     },[])
 
-    return token ? <>{children}</> : null;
+    return isLoggedIn ? <>{children}</> : null;
 }
 
 export default  AuthGuard;

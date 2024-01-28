@@ -33,8 +33,7 @@ const LoginFormComponent = () => {
     try {
       const response = await login({user: data});
       dispatch(setUser(response));
-      navigate('/home')
-      console.log(response);
+      navigate('/')
     } catch (e) {
       if (Array.isArray(e)) {
         setError("root", {

@@ -3,6 +3,7 @@ import LoginPageComponent from "./pages/auth/pages/Login/LoginPage";
 import HomePageComponent from "./pages/home/HomePage";
 import SignupPageComponent from "./pages/auth/pages/SignUp/SignupPage";
 import AuthGuard from "./guards/AuthGuard";
+import LoginGuard from "./guards/LoginGuard";
 
 function App() {
   return (
@@ -16,7 +17,14 @@ function App() {
             </AuthGuard>
           }
         />
-        <Route path={"/login"} element={<LoginPageComponent />} />
+        <Route
+            path={"/login"} 
+            element={
+              <LoginGuard>
+                <LoginPageComponent />
+              </LoginGuard>
+            }
+        />
         <Route path={"/register"} element={<SignupPageComponent/>}/>
       </Routes>
     </div>

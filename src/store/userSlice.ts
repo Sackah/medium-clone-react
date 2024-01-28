@@ -1,8 +1,14 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {User} from "../types/auth.types";
 
-const initialState: {user: User| null} = {
-    user: null
+interface UserState {
+    data: User | null;
+    isLoggedIn: boolean;
+}
+
+const initialState: UserState = {
+    data: null,
+    isLoggedIn: false
 }
 
 const userSlice = createSlice({
@@ -10,10 +16,14 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, payload    )=>{
-            state.user = payload.payload
+            state.data = payload.payload;
+            state.isLoggedIn = true;
+            localStorage.setItem("reactAppToken", state.data!.token);
         },
         clearUser: (state)=>{
-            state.user = null;
+            state.data = null;
+            state.isLoggedIn = false;
+            localStorage.removeItem("reactAppToken");
         }
     }
 })
