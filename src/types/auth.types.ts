@@ -8,8 +8,8 @@ export interface User {
     email: string;
     token: string;
     username: string;
-    bio: string | undefined;
-    image: string | undefined;
+    bio: string | null;
+    image: string | null;
 }
 
 /**

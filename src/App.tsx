@@ -12,7 +12,9 @@ function App() {
         <Route
           path={"/"}
           element={
-            <HomePageComponent />
+            <AuthGuard>
+              <HomePageComponent />
+            </AuthGuard>
           }
         />
         <Route
