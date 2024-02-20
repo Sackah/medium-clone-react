@@ -1,6 +1,6 @@
 /*** fonts ***/
 $font-logo: titillium web, sans-serif;
-$font-1: source sans pro,sans-serif;
+$font-1: source sans pro, sans-serif;
 
 /*** font sizes ***/
 $size-1: 0.75rem;
@@ -18,14 +18,27 @@ $size-10: 3rem;
 //white
 $light: #fff;
 $light-1: rgb(0 0 0 / 30%);
+$light-2: #ddd;
 
 // black
 $dark: #000;
 $dark-1: rgb(0 0 0 / 80%);
+$dark-2: #333;
 
 // grey
+$grey-1: #f3f3f3;
 $grey-2: #55595c;
 $grey-3: #373a3c;
+$grey-4: #bbb;
+$grey-5: #aaa;
+$grey-6: #999;
+$grey-7: #ccc;
 
 // green
-$main-green: #5cb85c !default;;
+$main-green: #5cb85c !default;
+
+// red
+$red-1: #b85c5c;
+
+
+

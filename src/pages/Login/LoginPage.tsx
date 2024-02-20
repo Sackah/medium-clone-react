@@ -1,6 +1,6 @@
 import "./LoginPage.scss";
-import LoginNavComponent from "../../components/LoginNav/LoginNav";
-import LoginFormComponent from "../../components/LoginForm/LoginForm";
+import LoginNavComponent from "../../shared/components/LoginNav/LoginNav";
+import LoginFormComponent from "./components/LoginForm/LoginForm";
 
 const LoginPageComponent = () => {
   return (

@@ -2,12 +2,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ButtonSpinnerA from "../../../../shared/components/loaders/button-spinner-a/ButtonSpinerA";
-import {useLogin} from '../../../../hooks/useLogin';
-import {useDispatch} from "react-redux";
-import {setUser} from "../../../../store/userSlice";
-import {useNavigate, NavLink} from "react-router-dom";
-import "../../styles/auth.styles.scss";
-
+import { useLogin } from "../../../../hooks/useLogin";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../../../store/userSlice";
+import { useNavigate, NavLink } from "react-router-dom";
+import "../../../../shared/stylesheets/auth.styles.scss";
 
 const schema = z.object({
   email: z.string().email(),
@@ -31,13 +30,13 @@ const LoginFormComponent = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const response = await login({user: data});
+      const response = await login({ user: data });
       dispatch(setUser(response));
-      navigate('/')
+      navigate("/");
     } catch (e) {
       if (Array.isArray(e)) {
         setError("root", {
-          message: e.join(', '),
+          message: e.join(", "),
         });
       } else if (e instanceof Error) {
         setError("root", {
@@ -51,7 +50,7 @@ const LoginFormComponent = () => {
     <section className={"login-form"}>
       <header>
         <h1>Sign In</h1>
-        <NavLink to={'/register'}>Need an account?</NavLink>
+        <NavLink to={"/register"}>Need an account?</NavLink>
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
         {errors.root && <div className={"error"}>{errors.root.message}</div>}

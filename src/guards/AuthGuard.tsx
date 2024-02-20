@@ -14,7 +14,7 @@ const AuthGuard = ({children}: AuthProps) => {
         if(!isLoggedIn){
             navigate('/login')
         }
-    },[])
+    },[navigate, user.isLoggedIn])
 
     return isLoggedIn ? <>{children}</> : null;
 }

@@ -15,7 +15,7 @@ const LoginGuard = ({children}: AuthProps) => {
         if(isLoggedIn){
             navigate("/");
         }
-    }, []);
+    }, [navigate, user.isLoggedIn]);
 
     return !isLoggedIn ? <>{children}</> : null;
 }

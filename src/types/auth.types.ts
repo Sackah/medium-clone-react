@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 export type AuthProps = {
     children: React.FC | React.ReactNode;
-}
+};
 
-export interface User{
+export interface User {
     email: string;
     token: string;
     username: string;
@@ -15,32 +15,30 @@ export interface User{
 /**
  *  Login
  */
-export interface LoginUserDetails{
+export interface LoginUserDetails {
     user: {
         email: string;
         password: string;
-    }
+    };
 }
 
-export interface LoginUserResponse{
+export interface LoginUserResponse {
     user: User;
 }
 
-export interface BackendErrors{
+export interface BackendErrors {
     [key: string]: string[];
 }
 
 /**
  *  Sign up
  */
-export interface SignUpUserDetails{
+export interface SignUpUserDetails {
     user: {
         username: string;
         email: string;
         password: string;
-    }
+    };
 }
 
-export interface SignUpUserResponse extends LoginUserResponse{}
-
-
+export interface SignUpUserResponse extends LoginUserResponse {}
