@@ -6,7 +6,8 @@ import { useLogin } from "../../../../hooks/useLogin";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../store/userSlice";
 import { useNavigate, NavLink } from "react-router-dom";
-import "../../../../shared/stylesheets/auth.styles.scss";
+import "../../../../shared/stylesheets/form.styles.scss";
+import { LoginUserResponse } from "../../../../types/auth.types";
 
 const schema = z.object({
   email: z.string().email(),
@@ -30,8 +31,8 @@ const LoginFormComponent = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const response = await login({ user: data });
-      dispatch(setUser(response));
+      const response = (await login({ user: data })) as LoginUserResponse;
+      dispatch(setUser(response.user));
       navigate("/");
     } catch (e) {
       if (Array.isArray(e)) {
@@ -47,7 +48,7 @@ const LoginFormComponent = () => {
   };
 
   return (
-    <section className={"login-form"}>
+    <section className={"login-form form"}>
       <header>
         <h1>Sign In</h1>
         <NavLink to={"/register"}>Need an account?</NavLink>
@@ -56,8 +57,14 @@ const LoginFormComponent = () => {
         {errors.root && <div className={"error"}>{errors.root.message}</div>}
         <input {...register("email")} type={"text"} placeholder={"Email"} />
         {errors.email && <div className={"error"}>{errors.email.message}</div>}
-        <input {...register("password")} type={"password"} placeholder={"Password"} />
-        {errors.password && <div className={"error"}>{errors.password.message}</div>}
+        <input
+          {...register("password")}
+          type={"password"}
+          placeholder={"Password"}
+        />
+        {errors.password && (
+          <div className={"error"}>{errors.password.message}</div>
+        )}
         {!isSubmitting && <button type={"submit"}>Sign In</button>}
         {isSubmitting && (
           <button type={"button"} disabled>

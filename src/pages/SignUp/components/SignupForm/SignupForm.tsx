@@ -6,7 +6,8 @@ import { useSignup } from "../../../../hooks/useSignup";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../store/userSlice";
 import { useNavigate, NavLink } from "react-router-dom";
-import "../../../../shared/stylesheets/auth.styles.scss";
+import { SignUpUserResponse } from "../../../../types/auth.types";
+import "../../../../shared/stylesheets/form.styles.scss";
 
 const schema = z.object({
   username: z.string().min(4),
@@ -31,8 +32,8 @@ const SignupFormComponent = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const response = await signup({ user: data });
-      dispatch(setUser(response));
+      const response = (await signup({ user: data })) as SignUpUserResponse;
+      dispatch(setUser(response.user));
       navigate("/");
     } catch (e) {
       if (Array.isArray(e)) {
@@ -48,7 +49,7 @@ const SignupFormComponent = () => {
   };
 
   return (
-    <section className={"signup-form"}>
+    <section className={"signup-form form"}>
       <header>
         <h1>Sign Up</h1>
         <NavLink to={"/login"}>Have an account?</NavLink>
@@ -56,11 +57,19 @@ const SignupFormComponent = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         {errors.root && <div className={"error"}>{errors.root.message}</div>}
         <input {...register("username")} type="text" placeholder="Username" />
-        {errors.username && <div className={"error"}>{errors.username.message}</div>}
-        <input {...register("email")} type="email" placeholder="email" />
+        {errors.username && (
+          <div className={"error"}>{errors.username.message}</div>
+        )}
+        <input {...register("email")} type="email" placeholder="Email" />
         {errors.email && <div className={"error"}>{errors.email.message}</div>}
-        <input {...register("password")} type="password" placeholder="password" />
-        {errors.password && <div className={"error"}>{errors.password.message}</div>}
+        <input
+          {...register("password")}
+          type="password"
+          placeholder="Password"
+        />
+        {errors.password && (
+          <div className={"error"}>{errors.password.message}</div>
+        )}
         {!isSubmitting && <button type={"submit"}>Sign Up</button>}
         {isSubmitting && (
           <button type={"button"} disabled>

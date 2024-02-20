@@ -9,14 +9,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route
-          path={"/"}
-          element={
-            <AuthGuard>
-              <HomePageComponent />
-            </AuthGuard>
-          }
-        />
+        <Route path={"/"} element={<HomePageComponent />} />
         <Route
           path={"/login"}
           element={

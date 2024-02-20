@@ -1,5 +1,3 @@
-import React from "react";
-
 export type AuthProps = {
     children: React.FC | React.ReactNode;
 };
@@ -8,8 +6,8 @@ export interface User {
     email: string;
     token: string;
     username: string;
-    bio: string | null;
-    image: string | null;
+    bio: string | undefined;
+    image: string | undefined;
 }
 
 /**

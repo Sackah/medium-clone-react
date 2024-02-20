@@ -1,5 +1,5 @@
 import {NavLink} from 'react-router-dom';
-import './LoginNav.scss';
+import "../../stylesheets/nav.styles.scss";
 
 const LoginNavComponent = () => {
 
