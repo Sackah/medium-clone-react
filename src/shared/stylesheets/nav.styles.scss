@@ -1,4 +1,4 @@
-@import "../../../styles/main.scss";
+@import "../../styles/main.scss";
 
 .navbar {
   width: 100%;
@@ -7,17 +7,20 @@
   justify-content: center;
 
   #logo {
-    font-size: 1.5rem;
-    margin-right: 2rem;
-    color: $main-green;
-    font-family: $font-logo;
+    @include logo;
   }
 
   & > nav {
-    width: 80%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include lg {
+      width: 80%;
+    }
+    @include breakpoint-height-max(700px) {
+      width: 80%;
+    }
 
     ul {
       list-style-type: none;
@@ -29,8 +32,24 @@
         a {
           text-decoration: none;
           color: $light-1;
+          @include center;
+          gap: 0.2rem;
+
           &.active {
             color: $dark-1;
+          }
+
+          &:hover {
+            color: $grey-3;
+          }
+
+          div.img {
+            width: 24px;
+            height: 24px;
+
+            img {
+              @include image;
+            }
           }
         }
       }

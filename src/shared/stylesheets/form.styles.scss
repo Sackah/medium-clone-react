@@ -1,7 +1,9 @@
 @import "../../styles/main.scss";
 
-section.signup-form,
-section.login-form {
+/**
+ * Any section element with form elements
+ */
+section.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,20 +19,24 @@ section.login-form {
       line-height: 4rem;
       font-weight: 400;
     }
+
     a {
       font-size: $size-3;
       color: $main-green;
       text-decoration: none;
+
       &:hover {
         text-decoration: underline;
       }
     }
   }
+
   form {
     margin: 0 auto;
     min-width: 500px;
 
-    input {
+    input,
+    textarea {
       display: block;
       margin-top: 10px;
       color: $grey-2;
@@ -39,6 +45,7 @@ section.login-form {
       border: 1px solid rgb(0 0 0 / 15%);
       width: 100%;
       font-size: $size-5;
+      font-family: $font-1;
 
       &:focus {
         outline: 1px solid $main-green;
