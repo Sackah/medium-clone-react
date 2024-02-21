@@ -1,0 +1,13 @@
+@import "../../styles/main.scss";
+
+section {
+  @include center;
+  flex-direction: column;
+  gap: 10px;
+
+  span {
+    @include center;
+    gap: 10px;
+    cursor: pointer;
+  }
+}

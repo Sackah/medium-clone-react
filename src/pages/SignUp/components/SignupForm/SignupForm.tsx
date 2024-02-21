@@ -6,7 +6,6 @@ import { useSignup } from "../../../../hooks/useSignup";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../store/userSlice";
 import { useNavigate, NavLink } from "react-router-dom";
-import { SignUpUserResponse } from "../../../../types/auth.types";
 import "../../../../shared/stylesheets/form.styles.scss";
 
 const schema = z.object({
@@ -32,7 +31,7 @@ const SignupFormComponent = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const response = (await signup({ user: data })) as SignUpUserResponse;
+      const response = await signup({ user: data });
       dispatch(setUser(response.user));
       navigate("/");
     } catch (e) {

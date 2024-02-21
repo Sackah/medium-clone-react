@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../../store/userSlice";
 import { useNavigate, NavLink } from "react-router-dom";
 import "../../../../shared/stylesheets/form.styles.scss";
-import { LoginUserResponse } from "../../../../types/auth.types";
 
 const schema = z.object({
   email: z.string().email(),
@@ -31,7 +30,7 @@ const LoginFormComponent = () => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const response = (await login({ user: data })) as LoginUserResponse;
+      const response = await login({ user: data });
       dispatch(setUser(response.user));
       navigate("/");
     } catch (e) {
