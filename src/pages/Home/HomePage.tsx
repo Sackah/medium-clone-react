@@ -2,14 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
+import { useState } from "react";
+import { Article } from "../../types/main.types";
 import LoginNavComponent from "../../shared/components/LoginNav/LoginNav";
 import HomeNavComponent from "../../shared/components/HomeNav/HomeNavComponent";
 import FeedHeader from "./components/FeedHeader/FeedHeader";
-import { useState } from "react";
-import "./HomePage.scss";
 import Footer from "../../shared/components/Footer/Footer";
 import Spinner from "../../shared/components/loaders/spinner/Spinner";
 import Pagination from "../../shared/components/Pagination/Pagination";
+import ErrorPage from "../../shared/pages/ErrorPage";
+import ArticleList from "./components/ArticleList/ArticleList";
+import "./HomePage.scss";
 
 const HomePageComponent = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -18,7 +21,11 @@ const HomePageComponent = () => {
   const articleLimit = 10;
   const loading = true;
   const error = false;
-  const data = [1, 2];
+  const data: Article[] = [];
+
+  const errorMessages = {
+    Network: ["Error. Check connectivity and try again"],
+  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,9 +64,9 @@ const HomePageComponent = () => {
                   <Spinner />
                 </span>
               ) : error ? (
-                <div className="error"></div>
+                <ErrorPage errors={errorMessages} refetch={() => {}} />
               ) : (
-                <div className="data"></div>
+                <ArticleList articles={data} />
               )}
             </div>
             {data.length > 0 && (

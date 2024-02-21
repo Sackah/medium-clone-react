@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BackendErrors } from "../../../types/auth.types";
-import "./BackendErrorComponent.css";
+import "./BackendErrorComponent.scss";
 
 type BackendErrorProps = {
   errors: BackendErrors;
@@ -10,10 +10,12 @@ const BackendErrorComponent = ({ errors }: BackendErrorProps) => {
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   useEffect(() => {
-    for (let err in errors) {
+    const newErrorMessages: string[] = [];
+    for (const err in errors) {
       const messages = errors[err];
-      setErrorMessages((prev) => [...prev, `${err} ${messages}`]);
+      newErrorMessages.push(`${err} ${messages}`);
     }
+    setErrorMessages(newErrorMessages);
   }, [errors]);
 
   return (

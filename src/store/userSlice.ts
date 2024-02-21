@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../types/auth.types";
+import { LocalStorageService } from "../utils/localStorage.service";
 
 interface UserState {
     data: User | undefined;
@@ -18,12 +19,12 @@ const userSlice = createSlice({
         setUser: (state, payload) => {
             state.data = payload.payload;
             state.isLoggedIn = true;
-            localStorage.setItem("reactAppToken", state.data!.token);
+            LocalStorageService.setAccessToken(state.data!.token);
         },
         clearUser: (state) => {
             state.data = undefined;
             state.isLoggedIn = false;
-            localStorage.removeItem("reactAppToken");
+            LocalStorageService.removeAccessToken();
         },
     },
 });

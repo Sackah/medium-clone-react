@@ -1,6 +1,6 @@
 @import "../../styles/main.scss";
 
-section {
+section.error-page {
   @include center;
   flex-direction: column;
   gap: 10px;
