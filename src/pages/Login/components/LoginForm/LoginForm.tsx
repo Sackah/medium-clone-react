@@ -1,19 +1,13 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import ButtonSpinnerA from "../../../../shared/components/loaders/button-spinner-a/ButtonSpinerA";
-import { useLogin } from "../../../../hooks/useLogin";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../../../store/userSlice";
-import { useNavigate, NavLink } from "react-router-dom";
+import * as imports from "./imports.module";
+import { type SubmitHandler } from "react-hook-form";
 import formStyles from "../../../../shared/stylesheets/form.styles.module.scss";
 
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+const schema = imports.z.object({
+  email: imports.z.string().email(),
+  password: imports.z.string().min(8),
 });
 
-type FormFields = z.infer<typeof schema>;
+type FormFields = imports.z.infer<typeof schema>;
 
 const LoginFormComponent = () => {
   const {
@@ -21,17 +15,17 @@ const LoginFormComponent = () => {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<FormFields>({
-    resolver: zodResolver(schema),
+  } = imports.useForm<FormFields>({
+    resolver: imports.zodResolver(schema),
   });
-  const { login } = useLogin();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { login } = imports.useLogin();
+  const dispatch = imports.useDispatch();
+  const navigate = imports.useNavigate();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
       const response = await login({ user: data });
-      dispatch(setUser(response.user));
+      dispatch(imports.setUser(response.user));
       navigate("/");
     } catch (e) {
       if (Array.isArray(e)) {
@@ -50,24 +44,28 @@ const LoginFormComponent = () => {
     <section className={`login-form ${formStyles.form}`}>
       <header>
         <h1>Sign In</h1>
-        <NavLink to={"/register"}>Need an account?</NavLink>
+        <imports.NavLink to={"/register"}>Need an account?</imports.NavLink>
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {errors.root && <div className={"error"}>{errors.root.message}</div>}
+        {errors.root && (
+          <div className={formStyles.error}>{errors.root.message}</div>
+        )}
         <input {...register("email")} type={"text"} placeholder={"Email"} />
-        {errors.email && <div className={"error"}>{errors.email.message}</div>}
+        {errors.email && (
+          <div className={formStyles.error}>{errors.email.message}</div>
+        )}
         <input
           {...register("password")}
           type={"password"}
           placeholder={"Password"}
         />
         {errors.password && (
-          <div className={"error"}>{errors.password.message}</div>
+          <div className={formStyles.error}>{errors.password.message}</div>
         )}
         {!isSubmitting && <button type={"submit"}>Sign In</button>}
         {isSubmitting && (
           <button type={"button"} disabled>
-            Signing In <ButtonSpinnerA />
+            Signing In <imports.ButtonSpinnerA />
           </button>
         )}
       </form>

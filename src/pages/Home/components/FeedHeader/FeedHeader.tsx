@@ -3,7 +3,7 @@ import styles from "../../../../shared/stylesheets/feed-headers.styles.module.sc
 type FeedHeaderProps = {
   feedName: string;
   isLoggedIn: boolean;
-  handleFeedChange: (feedName: string) => void;
+  handleFeedChange: (feedName: "global" | "feed") => void;
 };
 
 const FeedHeader = (props: FeedHeaderProps) => {
@@ -11,14 +11,22 @@ const FeedHeader = (props: FeedHeaderProps) => {
     <header className={styles.feed}>
       <p
         onClick={() => props.handleFeedChange("global")}
-        className={props.feedName === "global" ? `${styles.active}` : ""}
+        className={
+          props.feedName === "global"
+            ? `${styles.active} ${styles.p}`
+            : `${styles.p}`
+        }
       >
         Global Feed
       </p>
       {props.isLoggedIn && (
         <p
           onClick={() => props.handleFeedChange("feed")}
-          className={props.feedName === "feed" ? `${styles.active}` : ""}
+          className={
+            props.feedName === "feed"
+              ? `${styles.active} ${styles.p}`
+              : `${styles.p}`
+          }
         >
           Your feed
         </p>

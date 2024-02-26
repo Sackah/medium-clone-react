@@ -1,11 +1,6 @@
 @import "../../styles/main.scss";
 
 .home.page {
-  //remove this button
-  button {
-    position: absolute;
-    top: 0;
-  }
   section.hero {
     @include center;
     flex-direction: column;

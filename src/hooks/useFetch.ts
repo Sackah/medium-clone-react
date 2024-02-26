@@ -29,6 +29,7 @@ const useFetch = <T extends {}>(initialUrl: string) => {
         const fetchData = async () => {
             try {
                 const res = await fetch(`${environment.BaseUrl}${url}`, {
+                    method: "GET",
                     signal: abortCont.signal,
                     headers: {
                         Authorization: `Token ${accessToken}`,
@@ -64,7 +65,6 @@ const useFetch = <T extends {}>(initialUrl: string) => {
                 }
             }
         };
-
         fetchData();
 
         return () => {
@@ -72,7 +72,10 @@ const useFetch = <T extends {}>(initialUrl: string) => {
         };
     }, [url]);
 
-    const refetch = (newUrl: string = initialUrl) => setUrl(newUrl);
+    const refetch = (newUrl: string = initialUrl) => {
+        setIsPending(() => true);
+        setUrl(() => newUrl);
+    };
 
     return { data, isPending, error, refetch };
 };

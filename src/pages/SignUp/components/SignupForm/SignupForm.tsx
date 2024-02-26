@@ -1,20 +1,14 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import ButtonSpinnerA from "../../../../shared/components/loaders/button-spinner-a/ButtonSpinerA";
-import { useSignup } from "../../../../hooks/useSignup";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../../../store/userSlice";
-import { useNavigate, NavLink } from "react-router-dom";
+import * as imports from "./imports.module";
+import { type SubmitHandler } from "react-hook-form";
 import formStyles from "../../../../shared/stylesheets/form.styles.module.scss";
 
-const schema = z.object({
-  username: z.string().min(4),
-  email: z.string().email(),
-  password: z.string().min(8),
+const schema = imports.z.object({
+  username: imports.z.string().min(4),
+  email: imports.z.string().email(),
+  password: imports.z.string().min(8),
 });
 
-type FormFields = z.infer<typeof schema>;
+type FormFields = imports.z.infer<typeof schema>;
 
 const SignupFormComponent = () => {
   const {
@@ -22,17 +16,17 @@ const SignupFormComponent = () => {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<FormFields>({
-    resolver: zodResolver(schema),
+  } = imports.useForm<FormFields>({
+    resolver: imports.zodResolver(schema),
   });
-  const { signup } = useSignup();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { signup } = imports.useSignup();
+  const dispatch = imports.useDispatch();
+  const navigate = imports.useNavigate();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
       const response = await signup({ user: data });
-      dispatch(setUser(response.user));
+      dispatch(imports.setUser(response.user));
       navigate("/");
     } catch (e) {
       if (Array.isArray(e)) {
@@ -51,7 +45,7 @@ const SignupFormComponent = () => {
     <section className={`signup-form ${formStyles.form}`}>
       <header>
         <h1>Sign Up</h1>
-        <NavLink to={"/login"}>Have an account?</NavLink>
+        <imports.NavLink to={"/login"}>Have an account?</imports.NavLink>
       </header>
       <form onSubmit={handleSubmit(onSubmit)}>
         {errors.root && <div className={"error"}>{errors.root.message}</div>}
@@ -72,7 +66,7 @@ const SignupFormComponent = () => {
         {!isSubmitting && <button type={"submit"}>Sign Up</button>}
         {isSubmitting && (
           <button type={"button"} disabled>
-            Signing Up <ButtonSpinnerA />
+            Signing Up <imports.ButtonSpinnerA />
           </button>
         )}
       </form>
