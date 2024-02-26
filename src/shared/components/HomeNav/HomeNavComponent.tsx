@@ -1,16 +1,16 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import "../../stylesheets/nav.styles.scss";
+import navStyles from "../../stylesheets/nav.styles.module.scss";
 
 const HomeNavComponent = () => {
   const { data } = useSelector((state: RootState) => state.user);
   const user = data;
 
   return (
-    <div className="navbar">
+    <div className={navStyles.navbar}>
       <nav>
-        <div id="logo">conduit</div>
+        <div id={navStyles.logo}>conduit</div>
         <ul>
           <li>
             <NavLink to={"/"}>Home</NavLink>
@@ -23,7 +23,7 @@ const HomeNavComponent = () => {
           </li>
           <li>
             <NavLink to={`/profile/${user?.username}`}>
-              <div className="img">
+              <div className={navStyles.img}>
                 <img src={user?.image} alt="" />
               </div>
               Profile

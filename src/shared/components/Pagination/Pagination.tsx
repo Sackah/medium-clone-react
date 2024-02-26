@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Pagination.scss";
+import styles from "./Pagination.module.scss";
 
 type PaginationProps = {
   currentPage: number;
@@ -26,14 +26,16 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <ul className="pagination">
+    <ul className={styles.pagination}>
       {pages.map((page, i) => (
         <li
           key={i}
-          className={`page-item ${currentPage === page ? "active" : ""}`}
+          className={`${styles["page-item"]} ${
+            currentPage === page ? `${styles.active}` : ""
+          }`}
           onClick={() => changePage(page)}
         >
-          <span className="page-link">{page}</span>
+          <span className={styles["page-link"]}>{page}</span>
         </li>
       ))}
     </ul>

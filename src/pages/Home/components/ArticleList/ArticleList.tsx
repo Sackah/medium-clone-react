@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import { Article } from "../../../../types/main.types";
 import { formatDate } from "../../../../utils/formatDate";
 import HeartIcon from "../../../../shared/components/icons/Heart";
-import "./ArticleList.scss";
-import "../../../../shared/stylesheets/taglist.styles.scss";
+import styles from "./ArticleList.module.scss";
+import tagStyles from "../../../../shared/stylesheets/taglist.styles.module.scss";
 
 type ArticleListProps = {
   articles: Article[];
@@ -14,12 +14,12 @@ const ArticleList = ({ articles }: ArticleListProps) => {
   const pending = false;
 
   return (
-    <section className="article-list">
+    <section className={styles["article-list"]}>
       {articles.map((article) => (
         <article>
-          <div className="article-meta">
-            <span className="user-info">
-              <div className="img">
+          <div className={styles["article-meta"]}>
+            <span className={styles["user-info"]}>
+              <div className={styles.img}>
                 <img src={article.author.image} alt="profile" />
               </div>
               <div>
@@ -32,7 +32,9 @@ const ArticleList = ({ articles }: ArticleListProps) => {
             <button
               type="button"
               disabled={pending}
-              className={`likes ${article.favorited ? "active" : ""}`}
+              className={`${styles.likes} ${
+                article.favorited ? `${styles.active}` : ""
+              }`}
               onClick={() => favoriteArticle(article.slug, article.favorited)}
             >
               <HeartIcon />
@@ -42,11 +44,11 @@ const ArticleList = ({ articles }: ArticleListProps) => {
           <NavLink to={`/article/${article.slug}`}>
             <h1>{article.title}</h1>
             <p>{article.description}</p>
-            <div className="tags">
+            <div className={styles.tags}>
               <p>Read more...</p>
-              <ul className="taglist">
+              <ul className={tagStyles.taglist}>
                 {article.tagList.map((tag, index) => (
-                  <li className="tagitem" key={index}>
+                  <li className={tagStyles.tagitem} key={index}>
                     {tag}
                   </li>
                 ))}

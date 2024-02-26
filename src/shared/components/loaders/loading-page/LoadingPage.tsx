@@ -1,9 +1,9 @@
 import Spinner from "../spinner/Spinner";
-import "./LoadingPage.scss";
+import styles from "./LoadingPage.module.scss";
 
 const LoadingPage = () => {
   return (
-    <section>
+    <section className={styles.section}>
       <Spinner />
     </section>
   );

@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-import "./Footer.scss";
+import styles from "./Footer.module.scss";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className={styles.footer}>
       <NavLink to={"/"} className={"logo"}>
         conduit
       </NavLink>

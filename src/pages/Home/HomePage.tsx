@@ -12,7 +12,7 @@ import Spinner from "../../shared/components/loaders/spinner/Spinner";
 import Pagination from "../../shared/components/Pagination/Pagination";
 import ErrorPage from "../../shared/pages/ErrorPage";
 import ArticleList from "./components/ArticleList/ArticleList";
-import "./HomePage.scss";
+import styles from "./HomePage.module.scss";
 
 const HomePageComponent = () => {
   const user = useSelector((state: RootState) => state.user);
@@ -45,9 +45,9 @@ const HomePageComponent = () => {
 
   return (
     <>
-      <section className="home page">
+      <section className={`${styles.home} ${styles.page}`}>
         {user.isLoggedIn ? <HomeNavComponent /> : <LoginNavComponent />}
-        <section className="hero">
+        <section className={styles.hero}>
           <h1>conduit</h1>
           <p>A place to share your knowledge.</p>
         </section>
@@ -58,7 +58,7 @@ const HomePageComponent = () => {
               feedName={feedState}
               isLoggedIn={user.isLoggedIn}
             />
-            <div className="content">
+            <div className={styles.content}>
               {loading ? (
                 <span>
                   <Spinner />
@@ -78,11 +78,11 @@ const HomePageComponent = () => {
               />
             )}
           </section>
-          <section className="tags"></section>
+          <section className={styles.tags}></section>
         </main>
         <button onClick={handleLogout}>Logout</button>
       </section>
-      <footer className="footer">
+      <footer className={styles.footer}>
         <Footer />
       </footer>
     </>

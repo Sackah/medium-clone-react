@@ -1,4 +1,4 @@
-import "../../../../shared/stylesheets/feed-headers.styles.scss";
+import styles from "../../../../shared/stylesheets/feed-headers.styles.module.scss";
 
 type FeedHeaderProps = {
   feedName: string;
@@ -8,17 +8,17 @@ type FeedHeaderProps = {
 
 const FeedHeader = (props: FeedHeaderProps) => {
   return (
-    <header className="feed">
+    <header className={styles.feed}>
       <p
         onClick={() => props.handleFeedChange("global")}
-        className={props.feedName === "global" ? "active" : ""}
+        className={props.feedName === "global" ? `${styles.active}` : ""}
       >
         Global Feed
       </p>
       {props.isLoggedIn && (
         <p
           onClick={() => props.handleFeedChange("feed")}
-          className={props.feedName === "feed" ? "active" : ""}
+          className={props.feedName === "feed" ? `${styles.active}` : ""}
         >
           Your feed
         </p>

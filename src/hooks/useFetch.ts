@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { environment } from "../config";
 import { LocalStorageService } from "../utils/localStorage.service";
+import { BackendErrors } from "../types/auth.types";
 
 /**
  * Custom hook to fetch data
@@ -8,16 +9,17 @@ import { LocalStorageService } from "../utils/localStorage.service";
  * @property {null | T} data - the fetched data
  * @property {boolean} isPending - whether the data is still being fetched
  * @property {null | any} error - any errors that occured during fetch
- * @property {Function} refetch - a setter function to update the initial url
+ * @property {Function} refetch - a setter function to update the initial url, if no url passed, triggers
+ * refetch with initial url
  *
  * @param initialUrl a url called with the fetch hook
  * @returns {UseFetchResult}
  */
 
-const useFetch = <T extends {} = any>(initialUrl: string) => {
+const useFetch = <T extends {}>(initialUrl: string) => {
     const [data, setData] = useState<null | T>(null);
     const [isPending, setIsPending] = useState<boolean>(true);
-    const [error, setError] = useState<null | any>(null);
+    const [error, setError] = useState<null | BackendErrors>(null);
     const [url, setUrl] = useState(initialUrl);
 
     useEffect(() => {

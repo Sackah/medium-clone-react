@@ -6,7 +6,7 @@ import { useLogin } from "../../../../hooks/useLogin";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../../store/userSlice";
 import { useNavigate, NavLink } from "react-router-dom";
-import "../../../../shared/stylesheets/form.styles.scss";
+import formStyles from "../../../../shared/stylesheets/form.styles.module.scss";
 
 const schema = z.object({
   email: z.string().email(),
@@ -47,7 +47,7 @@ const LoginFormComponent = () => {
   };
 
   return (
-    <section className={"login-form form"}>
+    <section className={`login-form ${formStyles.form}`}>
       <header>
         <h1>Sign In</h1>
         <NavLink to={"/register"}>Need an account?</NavLink>

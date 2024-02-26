@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BackendErrors } from "../../../types/auth.types";
-import "./BackendErrorComponent.scss";
+import styles from "./BackendErrorComponent.module.scss";
 
 type BackendErrorProps = {
   errors: BackendErrors;
@@ -19,7 +19,7 @@ const BackendErrorComponent = ({ errors }: BackendErrorProps) => {
   }, [errors]);
 
   return (
-    <ul className="error-messages">
+    <ul className={styles["error-messages"]}>
       {errorMessages.map((message, i) => (
         <li key={i}>{message}</li>
       ))}
