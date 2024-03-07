@@ -4,7 +4,7 @@ import styles from "./Footer.module.scss";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <NavLink to={"/"} className={"logo"}>
+      <NavLink to={"/"} className={styles.logo}>
         conduit
       </NavLink>
       An interactive learning project from{" "}

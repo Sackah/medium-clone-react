@@ -3,6 +3,7 @@ import LoginPageComponent from "./pages/Login/LoginPage";
 import HomePageComponent from "./pages/Home/HomePage";
 import SignupPageComponent from "./pages/SignUp/SignupPage";
 import EditorPageComponent from "./pages/Editor/EditorPage";
+import SettingsPageComponent from "./pages/Settings/SettingsPage";
 import AuthGuard from "./guards/AuthGuard";
 import LoginGuard from "./guards/LoginGuard";
 
@@ -25,6 +26,14 @@ function App() {
           element={
             <AuthGuard>
               <EditorPageComponent />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path={"/settings"}
+          element={
+            <AuthGuard>
+              <SettingsPageComponent />
             </AuthGuard>
           }
         />

@@ -2,7 +2,7 @@ import * as imports from "./imports.module";
 import { type SubmitHandler } from "react-hook-form";
 import formStyles from "../../../../shared/stylesheets/form.styles.module.scss";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../../store/store";
+import { type RootState } from "../../../../store/store";
 
 const schema = imports.z.object({
   title: imports.z.string().min(1),

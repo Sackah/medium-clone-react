@@ -1,10 +1,14 @@
-import styles from "./SettingsPage.module.scss";
+import HomeNavComponent from "../../shared/components/HomeNav/HomeNavComponent";
+import SettingsFormComponent from "./components/SettingsForm/SettingsForm";
+import Footer from "../../shared/components/Footer/Footer";
 
 const SettingsPageComponent = () => {
   return (
-    <div>
-      <h1>Settings</h1>
-    </div>
+    <section className="page">
+      <HomeNavComponent />
+      <SettingsFormComponent />
+      <Footer />
+    </section>
   );
 };
 
