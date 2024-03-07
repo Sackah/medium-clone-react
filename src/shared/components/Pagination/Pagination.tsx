@@ -30,12 +30,10 @@ const Pagination: React.FC<PaginationProps> = ({
       {pages.map((page, i) => (
         <li
           key={i}
-          className={`${styles["page-item"]} ${
-            currentPage === page ? `${styles.active}` : ""
-          }`}
+          className={`${currentPage === page ? `${styles.active}` : ""}`}
           onClick={() => changePage(page)}
         >
-          <span className={styles["page-link"]}>{page}</span>
+          <span>{page}</span>
         </li>
       ))}
     </ul>

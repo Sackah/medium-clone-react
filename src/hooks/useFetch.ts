@@ -47,7 +47,7 @@ const useFetch = <T extends {}>(initialUrl: string) => {
                         throw errorMessages;
                     } else {
                         throw Error(
-                            "could not fetch the data for that resource",
+                            "Couldn't connect, check your network and try again",
                         );
                     }
                 }
@@ -62,6 +62,7 @@ const useFetch = <T extends {}>(initialUrl: string) => {
                 } else {
                     setIsPending(false);
                     setError(err instanceof Error ? err.message : err);
+                    throw err;
                 }
             }
         };

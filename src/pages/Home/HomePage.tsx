@@ -77,7 +77,7 @@ const HomePageComponent = () => {
             </div>
             {data && data.articles.length > 0 && (
               <imports.Pagination
-                total={500}
+                total={data.articlesCount}
                 currentPage={currentPage}
                 limit={articleLimit}
                 changePage={changePage}

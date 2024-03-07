@@ -3,26 +3,32 @@ import { BackendErrors } from "../../../types/auth.types";
 import styles from "./BackendErrorComponent.module.scss";
 
 type BackendErrorProps = {
-  errors: BackendErrors;
+  errors: BackendErrors | string;
 };
 
 const BackendErrorComponent = ({ errors }: BackendErrorProps) => {
-  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [errorMessages, setErrorMessages] = useState<string[] | string>([]);
 
   useEffect(() => {
-    const newErrorMessages: string[] = [];
-    for (const err in errors) {
-      const messages = errors[err];
-      newErrorMessages.push(`${err} ${messages}`);
+    if (typeof errors === "string") {
+      setErrorMessages(errors);
+    } else {
+      const newErrorMessages: string[] = [];
+      for (const err in errors) {
+        const messages = errors[err];
+        newErrorMessages.push(`${err} ${messages}`);
+      }
+      setErrorMessages(newErrorMessages);
     }
-    setErrorMessages(newErrorMessages);
   }, [errors]);
 
   return (
     <ul className={styles["error-messages"]}>
-      {errorMessages.map((message, i) => (
-        <li key={i}>{message}</li>
-      ))}
+      {Array.isArray(errorMessages) ? (
+        errorMessages.map((message, i) => <li key={i}>{message}</li>)
+      ) : (
+        <li>{errorMessages}</li>
+      )}
     </ul>
   );
 };

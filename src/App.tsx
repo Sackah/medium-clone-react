@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPageComponent from "./pages/Login/LoginPage";
 import HomePageComponent from "./pages/Home/HomePage";
 import SignupPageComponent from "./pages/SignUp/SignupPage";
+import EditorPageComponent from "./pages/Editor/EditorPage";
 import AuthGuard from "./guards/AuthGuard";
 import LoginGuard from "./guards/LoginGuard";
 
@@ -19,6 +20,14 @@ function App() {
           }
         />
         <Route path={"/register"} element={<SignupPageComponent />} />
+        <Route
+          path={"/editor"}
+          element={
+            <AuthGuard>
+              <EditorPageComponent />
+            </AuthGuard>
+          }
+        />
       </Routes>
     </div>
   );
