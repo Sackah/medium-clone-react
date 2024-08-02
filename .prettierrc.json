@@ -5,12 +5,6 @@
     "trailingComma": "all",
     "overrides": [
         {
-            "files": "*.tsx",
-            "options": {
-                "tabWidth": 2
-            }
-        },
-        {
             "files": "*.html",
             "options": {
                 "tabWidth": 4

@@ -1,0 +1,6 @@
+@import "../../styles/main.scss";
+
+.footer {
+  @include footer;
+  margin-top: 80px;
+}

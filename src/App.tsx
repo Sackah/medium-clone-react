@@ -8,38 +8,38 @@ import AuthGuard from "./guards/AuthGuard";
 import LoginGuard from "./guards/LoginGuard";
 
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path={"/"} element={<HomePageComponent />} />
-        <Route
-          path={"/login"}
-          element={
-            <LoginGuard>
-              <LoginPageComponent />
-            </LoginGuard>
-          }
-        />
-        <Route path={"/register"} element={<SignupPageComponent />} />
-        <Route
-          path={"/editor"}
-          element={
-            <AuthGuard>
-              <EditorPageComponent />
-            </AuthGuard>
-          }
-        />
-        <Route
-          path={"/settings"}
-          element={
-            <AuthGuard>
-              <SettingsPageComponent />
-            </AuthGuard>
-          }
-        />
-      </Routes>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Routes>
+                <Route path={"/"} element={<HomePageComponent />} />
+                <Route
+                    path={"/login"}
+                    element={
+                        <LoginGuard>
+                            <LoginPageComponent />
+                        </LoginGuard>
+                    }
+                />
+                <Route path={"/register"} element={<SignupPageComponent />} />
+                <Route
+                    path={"/editor"}
+                    element={
+                        <AuthGuard>
+                            <EditorPageComponent />
+                        </AuthGuard>
+                    }
+                />
+                <Route
+                    path={"/settings"}
+                    element={
+                        <AuthGuard>
+                            <SettingsPageComponent />
+                        </AuthGuard>
+                    }
+                />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
